@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang = "zh-Hant-TW">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" type="text/css" href="./css/service.css">
+        <title>ocpp manage system</title>
+    </head>
+    <body>
+        <div class="container">
+            <div id="add_user" class="popup">
+                新增使用者
+                <form action="./addUser" method="POST">
+                    帳號<input type="text" name="new_account"><br>
+                    密碼<input type="text" name="new_password"><br>
+                    <input type="radio" name="options" value="false">
+                    <label for="option_normal">一般使用者</label>
+                    <input type="radio" name="options" value="true">
+                    <label for="option_super">管理員</label><br>
+                    <input type="submit" value="確認新增">
+                </form>
+            </div>
+            <div id="remove_user" class="popup">
+                刪除使用者
+                <form action="./removeUser" method="POST">
+                    帳號<input type="text" name="target_account"><br>
+                    <input type="submit" value="確認刪除">
+                </form>
+            </div>
+            <div id="add_charge_point" class="popup">
+                新增充電樁
+                <form action="./addChargePoint" method="POST">
+                    型號<input type="text" name="new_model"><br>
+                    廠商<input type="text" name="new_vendor"><br>
+                    序號<input type="text" name="new_serial_number"><br>
+                    idTag<input type="text" name="new_idtag"><br>
+                    <input type="submit" value="確認新增">
+                </form>
+            </div>
+            <div id="remove_charge_point" class="popup">
+                刪除充電樁
+                <form action="./removeChargePoint" method="POST">
+                    序號<input type="text" name="target_serial_number"><br>
+                    <input type="submit" value="確認刪除">
+                </form>
+            </div>
+            <div id="update_charge_point_state" class="popup">
+                更改充電樁狀態<br>
+                序號<input type="text" id="target_serial_number"><br>
+                欲更改狀態
+                <select id="target_state">
+                    <option value="Available">Available</option>
+                    <option value="Preparing">Preparing</option>
+                    <option value="Charging">Charging</option>
+                    <option value="Finishing">Finishing</option>
+                    <option value="Unavailable">Unavailable</option>
+                </select><br>
+                <input type="button" onclick="update_charge_point_state()"  value="確認更改">
+            </div>
+            <div id="fixed_error_charge_point" class="popup">
+                修復異常充電樁<br>
+                序號
+                <select id="fixed_error" onchange="update_error_msg()">
+                    <option value="null" selected></option>
+                    <% 
+                        charge_point.forEach(element=> {
+                            if ( element.ERROR_CODE != 'NoError'){
+                    %>
+                    <option value='<%= element.SERIAL_NUMBER %>'> <%= element.SERIAL_NUMBER %> </option>
+                    <% }}); %>
+                </select>
+                <p>錯誤訊息:<br>
+                <textarea id="error_msg" rows="5" cols="40"></textarea>
+                </p>
+                <input type="button" onclick="fixed_error_charge_point()" value="修復完成">
+            </div>
+            <div class="left-side">
+                <p id="user_name"><img src="./img/nchc.png"></p>
+                <input type="button" value="新增使用者" onclick="show('add_user')"  <%= hide %>>
+                <input type="button" value="移除使用者" onclick="show('remove_user')" <%= hide %>>
+                <input type="button" value="新增充電樁" onclick="show('add_charge_point')" <%= hide %>>
+                <input type="button" value="移除充電樁" onclick="show('remove_charge_point')" <%= hide %>>
+                <input type="button" value="更改充電樁狀態" onclick="show('update_charge_point_state')" <%= hide %>>
+                <input type="button" value="修正異常充電樁" onclick="show('fixed_error_charge_point')" <%= hide %>>
+                <input type="button" value="登出" onclick="log_out()">
+            </div>
+            <div class="right-side">
+                <div class="right-top-side-container">
+                    <div class="box">
+                        <p>充電樁數量
+                            <input type="text" id="cp_number" disabled value="<%= charge_point_amount %>">
+                        </p>
+                    </div>
+                    <div class="box">
+                        <p>正在進行的充電
+                            <input type="text" id="charging" disabled value="<%= charge_point_charging_amount %>">
+                        </p>
+                    </div>
+                    <div class="box">
+                        <p>總共使用的電源
+                            <input type="text" id="ev" disabled value="<%= use_ev_amount %>">
+                        </p>
+                    </div>
+                    <div class="box">
+                        <p>異常充電樁
+                            <input type="text" id="error_cp" disabled value="<%= charge_point_error_amount %>">
+                        </p>
+                    </div>
+                </div>
+                <div class="right-bottom-side-container">
+                    <div class="right-bottom-left-side-container">
+                        <p>充電樁資訊</p>
+                        <div class="table_container">
+                            <table id="cp_info">
+                                <tr>
+                                    <th>型號  </th>
+                                    <th>廠商  </th>
+                                    <th>序號  </th>
+                                    <th>狀態  </th>
+                                    <th>開始充電時間  </th>
+                                    <th>本次充電度數  </th>
+                                    <th>累積充電度數  </th>
+                                    <th>錯誤</th>
+                                </tr>
+                                <tbody id = 'charge_point_list'>
+                                    <% 
+                                        charge_point.forEach(element => {
+                                    %>
+                                    <tr id = '<%= parseInt(element.SERIAL_NUMBER) %>'>
+                                        <td> <%= element.MODEL %> </td>
+                                        <td> <%= element.VENDOR %> </td>
+                                        <td> <%= element.SERIAL_NUMBER %> </td>
+                                        <td> <%= element.STATE %> </td>
+                                        <td> <%= element.START_TIME ? element.START_TIME : 'null' %> </td>
+                                        <td> <%= element.CURRENT_METER %> </td>
+                                        <td> <%= element.CUMULATIVE_METER %> </td>
+                                        <td> <%= element.ERROR_CODE %> </td>
+                                    </tr>
+
+                                    <% }); %>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="right-bottom-right-side-container" <%= hide %>>
+                        <div class="user_table_container">
+                            <p>使用者</p>
+                            <div class="user_table_container">
+                                <table id="user_info">
+                                    <tr>
+                                        <th>帳號  </th>
+                                        <th>管理員  </th>
+                                    </tr>
+                                    <tbody>
+                                        <% user_list.forEach(element=> {
+                                            %>
+                                            <tr>
+                                                <td>
+                                                    <%= element.user %>
+                                                </td>
+                                                <td>
+                                                    <%= element.is_manager %>
+                                                </td>
+                                            </tr>
+                                        
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </body>
+    <script src="./js/global.js"></script>
+    <script src="./js/info_handler.js"></script>
+    <script src="./js/websocket.js"></script>
+    <script src="./js/action.js"></script>
+    <script src="./js/main.js"></script>
+</html>

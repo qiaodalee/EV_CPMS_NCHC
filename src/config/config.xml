@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<cs>
+  <super>
+    <super_user>admin</super_user>
+    <super_passwd>495258EA87A1855629521D7442071CEF</super_passwd>
+  </super>
+  <super>
+    <super_user>nchc</super_user>
+    <super_passwd>11372FF7F170F7AA815F57156EB54897</super_passwd>
+  </super>
+  <super>
+    <super_user>nchcnchc</super_user>
+    <super_passwd>1DE797C11D73FBAF3D31BC0980750B70</super_passwd>
+  </super>
+  <super>
+    <super_user>ttuttu</super_user>
+    <super_passwd>9DD5A1DD646862A0FE69138E2A785F1F</super_passwd>
+  </super>
+  <super>
+    <super_user>matt</super_user>
+    <super_passwd>CE86D7D02A229ACFACA4B63F01A1171B</super_passwd>
+  </super>
+  <normal>
+    <user>ttu</user>
+    <passwd>81DC9BDB52D04DC20036DBD8313ED055</passwd>
+  </normal>
+</cs>

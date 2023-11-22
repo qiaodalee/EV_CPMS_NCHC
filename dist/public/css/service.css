@@ -1,0 +1,237 @@
+html, body {
+    height:100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    color: #D2D2E8
+  }
+
+  p{
+    font-weight: bold;
+  }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.popup {
+      display: none;
+      animation: fadeOut 0.5s ease-in-out;
+      transform: scale(0);
+}
+
+.popup.show {
+    display: block;
+    top: 20%;
+    left: 32%;
+    padding: 10%;
+    padding-top: 2%;
+    line-height: 250%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(255, 255, 255, 0.8);
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    animation: fadeIn 0.5s ease-in-out;
+    transform: scale(1);
+    color: #282A42;
+}
+
+.container {
+    display: flex;
+    height: 100%;
+  }
+  
+  .left-side {
+    flex: 1;
+    background-color: #3C3F5F;
+    font-size: 150%;
+    height: 100%;
+  }
+
+  .left-side img {
+    max-width: 100%;
+  }
+
+  .left-side input {
+    height: 40px;
+    width: 100%;
+    background-color: #3C3F5F;
+    border: none;
+    text-align: left;
+    font-size: 70%;
+    cursor: pointer;
+    color: #D2D2E8
+  }
+
+  .left-side input:hover {
+    background-color: #282A42;
+  }
+
+  .right-side {
+    flex: 7;
+    background-color:#282A42;
+    
+    .right-top-side-container{
+        display: flex; /* 使用 flexbox 進行橫向排列 */
+        gap: 20px; /* 元素之間的間隔 */
+        padding: 20px; /* 內容的間距 */
+        width: 70%;
+        height: 20%;
+        margin: 0 auto;
+    }
+
+    .box {
+        position: relative;
+        background-color: #3C3F5F;
+        padding: 0;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1; /* 分配相等的寬度給每個小方塊 */
+      }
+      
+      .box p {
+        margin: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 130%;
+        border-radius: 15px;
+        width: auto;
+        height: 50%;
+        background-color: #666CFF;
+      }
+      
+      .box input {
+        background-color: #3C3F5F;
+        border: none;
+        border-radius: 20px;
+        width: 80%;
+        height: 40%;
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 10;
+        font-size: 180%;
+        color: #D2D2E8
+      }
+
+      .right-bottom-left-side-container{
+        background-color: #3C3F5F;
+        gap: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        width: 75%;
+        border-radius: 20px;
+        position: relative;
+        height: 90%;
+        overflow: hidden;
+      }
+
+      .right-bottom-side-container {
+        display: flex;
+        height: 70%;
+      }
+
+      .right-bottom-left-side-container p {
+        margin-top: 0px;
+        margin-left: 5px;
+        font-size: 150%;
+        width: auto;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+
+      .table_container {
+        border-radius: 5px;
+        max-height: 90%;
+        overflow: auto;
+      }
+
+      .table_container table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .table_container th {
+        background-color: #666CFF;
+        padding: 10px;
+        text-align: left;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+      
+      .table_container td {
+        padding: 10px;
+        border-top: 1px solid #ccc;
+      }
+  }
+  
+  .right-bottom-right-side-container {
+        background-color: #3C3F5F;
+        gap: 20px;
+        padding: 20px;
+        margin: 0 auto;
+        width: 15%;
+        border-radius: 20px;
+        position: relative;
+        height: 90%;
+        overflow: hidden;
+  }
+
+.user_table_container {
+    border-radius: 5px;
+    max-height: 90%;
+    overflow: auto;
+  }
+
+  .user_table_container p {
+        margin-top: 0px;
+        margin-left: 5px;
+        font-size: 150%;
+        width: auto;
+        position: sticky;
+        top: 0;
+        z-index: 1;
+  }
+
+  .user_table_container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .user_table_container th {
+    background-color: #666CFF;
+    padding: 10px;
+    text-align: left;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .user_table_container td {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+  }
