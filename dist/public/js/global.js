@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://localhost:443');
+const ws = new WebSocket('ws://10.103.103.59:443');
 
 const idList = ['add_user', 'remove_user', 'add_charge_point', 'remove_charge_point', 'update_charge_point_state', 'fixed_error_charge_point'];
 

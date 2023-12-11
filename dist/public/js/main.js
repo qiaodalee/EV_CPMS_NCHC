@@ -42,12 +42,13 @@ function rec_message(rec_data) {
             .catch(err => {
                 console.error(err);
             })
-        return {
-            header: 'updateRes',
-            body: {
-                ok: true
-            }
-        };
+        return null;
+        //{
+        //    header: 'updateRes',
+        //    body: {
+        //        ok: true
+        //    }
+        //};
     }
 }
 

@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _server_routes_index_route__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../server/routes/index.route */ \"./src/server/routes/index.route.js\");\n/* harmony import */ var _server_routes_service_route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../server/routes/service.route */ \"./src/server/routes/service.route.js\");\n/* harmony import */ var _server_routes_admin_route__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../server/routes/admin.route */ \"./src/server/routes/admin.route.js\");\n/* harmony import */ var _server_routes_sql_route__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../server/routes/sql.route */ \"./src/server/routes/sql.route.js\");\n/* express.js */\n\n\n\n\n\nconst app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use((req, res, next) => {\n  const now = new Date();\n  const currentHour = now.getHours();\n  const currentMinute = now.getMinutes();\n  const currentSecond = now.getSeconds();\n  console.log(`${currentHour}:${currentMinute}:${currentSecond}` + ' GMT+0800 (台北標準時間): ' + req.method + \" \" + req.url);\n  next();\n});\n\n/* GET home page. */\napp.use('/', _server_routes_index_route__WEBPACK_IMPORTED_MODULE_1__[\"default\"]);\napp.use('/admin', _server_routes_admin_route__WEBPACK_IMPORTED_MODULE_3__[\"default\"]);\napp.use('/service', _server_routes_service_route__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\napp.use('/sql', _server_routes_sql_route__WEBPACK_IMPORTED_MODULE_4__[\"default\"]);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (app);\n\n//# sourceURL=webpack://ev_ocpp_by_node/./src/config/express.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ \"express\");\n/* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! cors */ \"cors\");\n/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _server_routes_index_route__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../server/routes/index.route */ \"./src/server/routes/index.route.js\");\n/* harmony import */ var _server_routes_service_route__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../server/routes/service.route */ \"./src/server/routes/service.route.js\");\n/* harmony import */ var _server_routes_admin_route__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../server/routes/admin.route */ \"./src/server/routes/admin.route.js\");\n/* harmony import */ var _server_routes_sql_route__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../server/routes/sql.route */ \"./src/server/routes/sql.route.js\");\n/* express.js */\n\n\n\n\n\n\nconst app = express__WEBPACK_IMPORTED_MODULE_0___default()();\napp.use(cors__WEBPACK_IMPORTED_MODULE_1___default()());\napp.use((req, res, next) => {\n  const now = new Date();\n  const currentHour = now.getHours();\n  const currentMinute = now.getMinutes();\n  const currentSecond = now.getSeconds();\n  console.log(`${currentHour}:${currentMinute}:${currentSecond}` + ' GMT+0800 (台北標準時間): ' + req.method + \" \" + req.url);\n  next();\n});\n\n/* GET home page. */\napp.use('/', _server_routes_index_route__WEBPACK_IMPORTED_MODULE_2__[\"default\"]);\napp.use('/admin', _server_routes_admin_route__WEBPACK_IMPORTED_MODULE_4__[\"default\"]);\napp.use('/service', _server_routes_service_route__WEBPACK_IMPORTED_MODULE_3__[\"default\"]);\napp.use('/sql', _server_routes_sql_route__WEBPACK_IMPORTED_MODULE_5__[\"default\"]);\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (app);\n\n//# sourceURL=webpack://ev_ocpp_by_node/./src/config/express.js?");
 
 /***/ }),
 
@@ -157,6 +157,16 @@ module.exports = require("body-parser");
 /***/ ((module) => {
 
 module.exports = require("cookie-parser");
+
+/***/ }),
+
+/***/ "cors":
+/*!***********************!*\
+  !*** external "cors" ***!
+  \***********************/
+/***/ ((module) => {
+
+module.exports = require("cors");
 
 /***/ }),
 

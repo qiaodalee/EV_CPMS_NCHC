@@ -12,18 +12,21 @@ const ocpp = 80;
 var server;
 
 server = express()
-    .listen(PORT, () => console.log(`Listening on ${PORT}`));
+    .listen(PORT, '10.103.103.59', () => console.log(`Listening on ${PORT}`));
 
 
 const wss = new SocketServer({ server });
 
 const charge_point_client = new Map();
 var ocpp_client = new Map();
+var ocpp_client_arr = [];
 const ocpp_id = Math.floor(Math.random() * Math.pow(10, 16)).toString();
 
 function send_to_ocpp(rec_data) {
     console.log("\n[cp]   cp send to ocpp: " + JSON.stringify(rec_data));
-    send_massage(rec_data, ocpp_client.get(ocpp_id));
+    ocpp_client.get(ocpp_id).forEach( ocpp_socket =>{
+    	send_massage(rec_data, ocpp_socket);
+    })
 }
 
 function send_to_charge_point(rec_data) {
@@ -34,7 +37,8 @@ function send_to_charge_point(rec_data) {
 function deconstruct(rec_data, ws) {
     console.log("\n[cp]   cp send to ocpp: " + JSON.stringify(rec_data))
     if (rec_data["header"] == "IDReq") {
-        ocpp_client.set(ocpp_id, ws)
+    	ocpp_client_arr.push(ws);
+        ocpp_client.set(ocpp_id, ocpp_client_arr)
         console.log("[ocpp] rec data: " + JSON.stringify(rec_data))
         console.log("[ocpp] ocpp server id: " + ocpp_id)
         console.log("[ws]   send data: " + JSON.stringify({
@@ -44,7 +48,7 @@ function deconstruct(rec_data, ws) {
         send_massage({
             header: "IDRes",
             body: { id: ocpp_id }
-        }, ocpp_client.get(ocpp_id))
+        }, ws)
         return
     }
 
@@ -420,5 +424,13 @@ wss.on('connection', (ws, req) => {
 
     ws.on('close', () => {
         console.log('[ws]   Client close connected')
+        
+        console.log(ocpp_client.get(ocpp_id).indexOf(ws));
+        if(ocpp_client.get(ocpp_id).indexOf(ws) != -1){
+        	console.log('-----------------------in here------------------')
+        	ocpp_client.get(ocpp_id).splice(ocpp_client.get(ocpp_id).indexOf(ws),1);
+        }
+        else{
+        }
     })
 })

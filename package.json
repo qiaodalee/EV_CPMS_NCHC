@@ -14,7 +14,9 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
+    "concurrently": "^8.2.2",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "ejs": "^3.1.9",
     "express": "^4.18.2",
@@ -22,6 +24,8 @@
     "joi": "^17.10.1",
     "md5": "^2.3.0",
     "mysql": "^2.18.1",
+    "nodeman": "^1.1.2",
+    "nodemon": "^3.0.1",
     "socket.io": "^4.7.2",
     "ws": "^8.14.2",
     "xml2js": "^0.6.2",
